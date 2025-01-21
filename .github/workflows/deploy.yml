@@ -1,24 +1,20 @@
 name: Deploy to GitHub Pages
 
 on:
-  # Ce workflow se déclenchera sur chaque push sur la branche 'main'
   push:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   deploy:
-    # Spécifie le système d'exploitation sur lequel le job sera exécuté
     runs-on: ubuntu-latest
     steps:
-      # Checkout le code de votre dépôt dans l'environnement de GitHub Actions
       - uses: actions/checkout@v2
-
-      # Utilise une action spécifique pour déployer sur GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          # Le token GitHub est nécessaire pour publier
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          # Définit le répertoire à partir duquel le site doit être publié
+          personal_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           publish_dir: ./
